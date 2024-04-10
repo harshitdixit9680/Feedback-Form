@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import FeedbackForm from './Component/FeedbackForm';
+import Navbar from './Component/Navbar';
+import { Routes, Route} from "react-router-dom";
+
 
 function App() {
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [editingFeedback, setEditingFeedback] = useState(null);
+
+  const addFeedback = (newFeedback) => {
+    setFeedbacks([...feedbacks, newFeedback]);
+  };
+
+
+  const updateFeedback = (updatedFeedback) => {
+    setFeedbacks(feedbacks.map((feedback) => 
+      feedback.id === updatedFeedback.id ? updatedFeedback : feedback
+    ));
+    setEditingFeedback(null); // Clear editing state after update
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route exact path="/" element={<FeedbackForm addFeedback={addFeedback} />} />
+
+      </Routes>
+
+      {/* Render edit form if editingFeedback is not null */}
+      {editingFeedback && (
+        <div className="edit-feedback-form">
+          <FeedbackForm feedback={editingFeedback} updateFeedback={updateFeedback} />
+        </div>
+      )}
+    </>
   );
 }
 
