@@ -1,7 +1,7 @@
 ### install git repo in local system git clone
 ### please paste the command in you cmd 
 
-### 'git clone https://github.com/'
+### 'git clone [https://github.com](https://github.com/harshitdixit9680/https---github.com-harshitdixit9680-Feedback-Form)/'
 
 # Getting Started with Create React App
 
